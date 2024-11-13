@@ -10,8 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 /**
- * Representa una entidad de Usuario en la aplicación, la cual contiene la
- * información básica de un usuario y marcas de tiempo de creación y modificación.
+ * Representa una entidad de Cliente en la aplicación, la cual contiene la
+ * información básica de un cliente y marcas de tiempo de creación y modificación.
  * <p>
  * Anotaciones:
  * - @Entity: Marca esta clase como una entidad de JPA, que será mapeada a
@@ -23,42 +23,42 @@ import java.time.LocalDateTime;
  * - @UpdateTimestamp: Marca el momento de modificación del registro.
  */
 @Entity
-public class User {
+public class Client {
 
     /**
-     * Identificador único del usuario, generado automáticamente.
+     * Identificador único del cliente, generado automáticamente.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long clientId;
 
     /**
-     * Nombre del usuario.
+     * Nombre del cliente.
      */
     private String name;
 
     /**
-     * Apellido del usuario.
+     * Apellido del cliente.
      */
     private String lastName;
 
     /**
-     * Tipo de documento de identificación del usuario (ej., "CC": cédula).
+     * Tipo de documento de identificación del cliente (ej., "CC": cédula).
      */
     private String documentType;
 
     /**
-     * Número del documento de identificación del usuario.
+     * Número del documento de identificación del cliente.
      */
     private String documentNumber;
 
     /**
-     * Correo electrónico del usuario.
+     * Correo electrónico del cliente.
      */
     private String email;
 
     /**
-     * Número de teléfono del usuario.
+     * Número de teléfono del cliente.
      */
     private String phone;
 
@@ -77,61 +77,61 @@ public class User {
     // Getters y setters
 
     /**
-     * Obtiene el ID del usuario.
+     * Obtiene el ID del cliente.
      *
-     * @return userId ID del usuario.
+     * @return clientId ID del cliente.
      */
-    public Long getUserId() {
-        return userId;
+    public Long getClientId() {
+        return clientId;
     }
 
     /**
-     * Establece el ID del usuario.
+     * Establece el ID del cliente.
      *
-     * @param userId ID del usuario.
+     * @param clientId ID del cliente.
      */
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     /**
-     * Obtiene el nombre del usuario.
+     * Obtiene el nombre del cliente.
      *
-     * @return name Nombre del usuario.
+     * @return name Nombre del cliente.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Establece el nombre del usuario.
+     * Establece el nombre del cliente.
      *
-     * @param name Nombre del usuario.
+     * @param name Nombre del cliente.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Obtiene el apellido del usuario.
+     * Obtiene el apellido del cliente.
      *
-     * @return lastName Apellido del usuario.
+     * @return lastName Apellido del cliente.
      */
     public String getLastName() {
         return lastName;
     }
 
     /**
-     * Establece el apellido del usuario.
+     * Establece el apellido del cliente.
      *
-     * @param lastName Apellido del usuario.
+     * @param lastName Apellido del cliente.
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     /**
-     * Obtiene el tipo de documento de identificación del usuario.
+     * Obtiene el tipo de documento de identificación del cliente.
      *
      * @return documentType Tipo de documento de identificación.
      */
@@ -140,7 +140,7 @@ public class User {
     }
 
     /**
-     * Establece el tipo de documento de identificación del usuario.
+     * Establece el tipo de documento de identificación del cliente.
      *
      * @param documentType Tipo de documento de identificación.
      */
@@ -149,7 +149,7 @@ public class User {
     }
 
     /**
-     * Obtiene el número de documento de identificación del usuario.
+     * Obtiene el número de documento de identificación del cliente.
      *
      * @return documentNumber Número de documento de identificación.
      */
@@ -158,7 +158,7 @@ public class User {
     }
 
     /**
-     * Establece el número de documento de identificación del usuario.
+     * Establece el número de documento de identificación del cliente.
      *
      * @param documentNumber Número de documento de identificación.
      */
@@ -167,36 +167,36 @@ public class User {
     }
 
     /**
-     * Obtiene el correo electrónico del usuario.
+     * Obtiene el correo electrónico del cliente.
      *
-     * @return email Correo electrónico del usuario.
+     * @return email Correo electrónico del cliente.
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Establece el correo electrónico del usuario.
+     * Establece el correo electrónico del cliente.
      *
-     * @param email Correo electrónico del usuario.
+     * @param email Correo electrónico del cliente.
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Obtiene el número de teléfono de contacto del usuario.
+     * Obtiene el número de teléfono de contacto del cliente.
      *
-     * @return phone Número de teléfono del usuario.
+     * @return phone Número de teléfono del cliente.
      */
     public String getPhone() {
         return phone;
     }
 
     /**
-     * Establece el número de teléfono de contacto del usuario.
+     * Establece el número de teléfono de contacto del cliente.
      *
-     * @param phone Número de teléfono del usuario.
+     * @param phone Número de teléfono del cliente.
      */
     public void setPhone(String phone) {
         this.phone = phone;

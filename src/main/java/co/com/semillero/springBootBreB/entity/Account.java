@@ -34,9 +34,9 @@ public class Account {
     private Long accountId;
 
     /**
-     * Identificador del usuario asociado a la cuenta.
+     * Identificador del cliente asociado a la cuenta.
      */
-    private Long userId;
+    private Long clientId;
 
     /**
      * Llave o Alias de la cuenta.
@@ -93,19 +93,19 @@ public class Account {
     /**
      * Obtiene el ID del usuario asociado a la cuenta.
      *
-     * @return userId ID del usuario asociado.
+     * @return clientId ID del cliente asociado.
      */
-    public Long getUserId() {
-        return userId;
+    public Long getClientId() {
+        return clientId;
     }
 
     /**
      * Establece el ID del usuario asociado a la cuenta.
      *
-     * @param userId ID del usuario asociado.
+     * @param clientId ID del cliente asociado.
      */
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     /**
