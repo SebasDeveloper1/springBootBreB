@@ -6,6 +6,8 @@ import co.com.semillero.springBootBreB.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Controlador REST para gestionar las operaciones relacionadas con las cuentas.
  * <p>
@@ -30,6 +32,16 @@ public class AccountController {
     @PostMapping
     public Account createAccount(@RequestBody AccountRequestDTO accountRequestDTO) {
         return accountService.createAccount(accountRequestDTO);
+    }
+
+    /**
+     * Obtiene el listado de todas las cuentas.
+     *
+     * @return Lista de todas las cuentas.
+     */
+    @GetMapping
+    public List<Account> getAllAccounts() {
+        return accountService.getAllAccounts();
     }
 
     /**

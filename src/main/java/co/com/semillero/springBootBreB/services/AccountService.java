@@ -6,6 +6,8 @@ import co.com.semillero.springBootBreB.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Servicio para gestionar las operaciones relacionadas con la entidad Cuenta.
  * <p>
@@ -34,6 +36,15 @@ public class AccountService {
         account.setAccountType(accountRequestDTO.getAccountType());
         account.setBank(accountRequestDTO.getBank());
         return accountRepository.save(account);
+    }
+
+    /**
+     * Obtiene el listado de todas las cuentas en la base de datos.
+     *
+     * @return Lista de todas las cuentas.
+     */
+    public List<Account> getAllAccounts() {
+        return accountRepository.findAll();
     }
 
     /**
