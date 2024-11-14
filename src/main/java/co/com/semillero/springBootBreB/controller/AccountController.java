@@ -1,5 +1,6 @@
 package co.com.semillero.springBootBreB.controller;
 
+import co.com.semillero.springBootBreB.dto.AccountRequestDTO;
 import co.com.semillero.springBootBreB.entity.Account;
 import co.com.semillero.springBootBreB.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,14 @@ public class AccountController {
     private AccountService accountService;
 
     /**
-     * Crea una nueva cuenta en la base de datos.
+     * Crea una nueva cuenta en la base de datos a partir de un DTO de solicitud.
      *
-     * @param account Objeto Cuenta a crear, recibido en el cuerpo de la solicitud.
+     * @param accountRequestDTO DTO con los datos de la cuenta a crear, recibido en el cuerpo de la solicitud.
      * @return Cuenta creada y guardada en la base de datos.
      */
     @PostMapping
-    public Account createAccount(@RequestBody Account account) {
-        return accountService.createAccount(account);
+    public Account createAccount(@RequestBody AccountRequestDTO accountRequestDTO) {
+        return accountService.createAccount(accountRequestDTO);
     }
 
     /**
