@@ -102,4 +102,13 @@ public class TransactionService {
                 t.getMessage()
         );
     }
+
+    /**
+     * Elimina una transaccion de la base de datos por su ID.
+     *
+     * @param transactionId ID de la transaccion a eliminar.
+     */
+    public void deleteTransaction(Long transactionId) {
+        transactionRepository.deleteById(transactionId);
+    }
 }

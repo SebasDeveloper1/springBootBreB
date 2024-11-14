@@ -51,4 +51,14 @@ public class TransactionController {
     public TransactionResponseDTO getTransactionDetails(@PathVariable Long transactionId) {
         return transactionService.getTransactionDetails(transactionId);
     }
+
+    /**
+     * Elimina un transaccion de la base de datos por su ID.
+     *
+     * @param transactionId ID del transaccion a eliminar, obtenido de la ruta.
+     */
+    @DeleteMapping("/{transactionId}")
+    public void deleteUser(@PathVariable Long transactionId) {
+        transactionService.deleteTransaction(transactionId);
+    }
 }
