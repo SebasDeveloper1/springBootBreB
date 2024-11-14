@@ -9,15 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * Servicio para gestionar las operaciones relacionadas con las transacciones.
- * <p>
- * Anotaciones:
- * - @Service: Indica que esta clase es un servicio de Spring que contiene la lógica de negocio relacionada
- * con las transacciones.
- * - @Autowired: Inyecta automáticamente una instancia del repositorio de transacciones para interactuar con la base de datos.
  */
 @Service
 public class TransactionService {
@@ -28,8 +24,10 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    /**
+     * Crea una nueva transacción (transferencia) en la base de datos.
+     */
     public TransactionResponseDTO createTransaction(Transaction transaction) {
-        // Validación de las cuentas y ejecución de la lógica de transferencia
         var sourceAccount = accountRepository.findById(transaction.getSourceAccountId());
         var destinationAccount = accountRepository.findById(transaction.getDestinationAccountId());
 
@@ -61,15 +59,10 @@ public class TransactionService {
 
     /**
      * Obtiene el listado de transacciones correspondientes a un cliente por su ID.
-     *
-     * @param clientId El ID del cliente.
-     * @return Una lista de DTOs de transacciones correspondientes a las cuentas asociadas con el cliente.
      */
     public List<TransactionResponseDTO> getTransactionsByClientId(Long clientId) {
-        // Obtener las transacciones donde el cliente es la cuenta de origen o destino
         List<Transaction> transactions = transactionRepository.findBySourceAccountIdOrDestinationAccountId(clientId, clientId);
 
-        // Convertir las transacciones a DTOs
         return transactions.stream()
                 .map(transaction -> new TransactionResponseDTO(
                         transaction.getTransactionId(),
@@ -80,5 +73,33 @@ public class TransactionService {
                         transaction.getStatus(),
                         transaction.getMessage()))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Obtiene los detalles de una transacción por su ID.
+     *
+     * @param transactionId El ID de la transacción.
+     * @return Los detalles de la transacción en formato DTO.
+     */
+    public TransactionResponseDTO getTransactionDetails(Long transactionId) {
+        // Buscar la transacción por su ID
+        Optional<Transaction> transaction = transactionRepository.findById(transactionId);
+
+        if (transaction.isEmpty()) {
+            // Si la transacción no existe, puede devolver un DTO con datos vacíos o un mensaje de error
+            return new TransactionResponseDTO(null, null, null, null, null, "FALLIDO", "Transacción no encontrada");
+        }
+
+        // Si la transacción existe, devolverla en el formato DTO
+        Transaction t = transaction.get();
+        return new TransactionResponseDTO(
+                t.getTransactionId(),
+                t.getSourceAccountId(),
+                t.getDestinationAccountId(),
+                t.getAmount(),
+                t.getDate(),
+                t.getStatus(),
+                t.getMessage()
+        );
     }
 }
