@@ -58,13 +58,13 @@ public class AccountController {
     }
 
     /**
-     * Obtiene una cuenta por su ID.
+     * Obtiene una cuenta por su ID desde el encabezado de la solicitud.
      *
-     * @param accountId ID de la cuenta a buscar, obtenido de la ruta.
+     * @param accountId ID de la cuenta a buscar, recibido en el encabezado de la solicitud.
      * @return Cuenta encontrada o null si no existe.
      */
-    @GetMapping("/{accountId}")
-    public Account getAccount(@PathVariable Long accountId) {
+    @GetMapping("/details")
+    public Account getAccount(@RequestHeader("Account-Id") Long accountId) {
         return accountService.getAccount(accountId);
     }
 

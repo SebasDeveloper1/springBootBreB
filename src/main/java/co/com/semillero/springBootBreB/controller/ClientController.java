@@ -45,13 +45,13 @@ public class ClientController {
     }
 
     /**
-     * Obtiene un cliente por su ID.
+     * Obtiene un cliente por su ID desde el encabezado de la solicitud.
      *
-     * @param clientId ID del cliente a buscar, obtenido de la ruta.
+     * @param clientId ID del cliente a buscar, recibido en el encabezado de la solicitud.
      * @return Cliente encontrado o null si no existe.
      */
-    @GetMapping("/{clientId}")
-    public Client getUser(@PathVariable Long clientId) {
+    @GetMapping("/details")
+    public Client getUser(@RequestHeader("Client-Id") Long clientId) {
         return clientService.getClient(clientId);
     }
 

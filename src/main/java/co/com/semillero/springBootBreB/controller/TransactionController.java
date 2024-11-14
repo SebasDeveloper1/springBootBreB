@@ -31,13 +31,13 @@ public class TransactionController {
     }
 
     /**
-     * Obtiene todas las transacciones relacionadas con un cliente por su ID.
+     * Obtiene todas las transacciones relacionadas con un cliente por su ID, obtenido desde el encabezado de la solicitud.
      *
-     * @param clientId El ID del cliente.
+     * @param clientId El ID del cliente, recibido en el encabezado de la solicitud.
      * @return Una lista de transacciones asociadas al cliente.
      */
-    @GetMapping("/client/{clientId}")
-    public List<TransactionResponseDTO> getTransactionsByClientId(@PathVariable Long clientId) {
+    @GetMapping("/client-transactions")
+    public List<TransactionResponseDTO> getTransactionsByClientId(@RequestHeader("Client-Id") Long clientId) {
         return transactionService.getTransactionsByClientId(clientId);
     }
 
