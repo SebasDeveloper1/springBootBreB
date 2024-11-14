@@ -3,18 +3,7 @@ package co.com.semillero.springBootBreB.dto;
 import java.time.LocalDateTime;
 
 /**
- * DTO para representar la respuesta de una transacción de transferencia.
- * Contiene información detallada sobre el estado de la transacción.
- * <p>
- * Atributos:
- * - transactionId: Identificador único de la transacción.
- * - sourceAccountId: Identificador de la cuenta de origen.
- * - destinationAccountId: Identificador de la cuenta de destino.
- * - amount: Monto de la transacción.
- * - date: Fecha y hora en que se realizó la transacción.
- * - status: Estado de la transacción, que puede ser "COMPLETED" o "FAILED".
- * - message: Mensaje descriptivo del estado de la transacción, incluyendo
- *   la razón del fallo si aplica.
+ * DTO para la respuesta de una transacción.
  */
 public class TransactionResponseDTO {
 
@@ -26,10 +15,6 @@ public class TransactionResponseDTO {
     private String status;
     private String message;
 
-    // Constructor vacío
-    public TransactionResponseDTO() {}
-
-    // Constructor completo
     public TransactionResponseDTO(Long transactionId, Long sourceAccountId, Long destinationAccountId,
                                   Double amount, LocalDateTime date, String status, String message) {
         this.transactionId = transactionId;
@@ -41,8 +26,7 @@ public class TransactionResponseDTO {
         this.message = message;
     }
 
-    // Getters y Setters
-
+    // Getters y setters
     public Long getTransactionId() {
         return transactionId;
     }

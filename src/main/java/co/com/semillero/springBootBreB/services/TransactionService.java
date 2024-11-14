@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Servicio para gestionar las operaciones relacionadas con las transacciones.
@@ -55,5 +57,28 @@ public class TransactionService {
         return new TransactionResponseDTO(transaction.getTransactionId(), transaction.getSourceAccountId(),
                 transaction.getDestinationAccountId(), transaction.getAmount(), transaction.getDate(), transaction.getStatus(),
                 transaction.getMessage());
+    }
+
+    /**
+     * Obtiene el listado de transacciones correspondientes a un cliente por su ID.
+     *
+     * @param clientId El ID del cliente.
+     * @return Una lista de DTOs de transacciones correspondientes a las cuentas asociadas con el cliente.
+     */
+    public List<TransactionResponseDTO> getTransactionsByClientId(Long clientId) {
+        // Obtener las transacciones donde el cliente es la cuenta de origen o destino
+        List<Transaction> transactions = transactionRepository.findBySourceAccountIdOrDestinationAccountId(clientId, clientId);
+
+        // Convertir las transacciones a DTOs
+        return transactions.stream()
+                .map(transaction -> new TransactionResponseDTO(
+                        transaction.getTransactionId(),
+                        transaction.getSourceAccountId(),
+                        transaction.getDestinationAccountId(),
+                        transaction.getAmount(),
+                        transaction.getDate(),
+                        transaction.getStatus(),
+                        transaction.getMessage()))
+                .collect(Collectors.toList());
     }
 }
