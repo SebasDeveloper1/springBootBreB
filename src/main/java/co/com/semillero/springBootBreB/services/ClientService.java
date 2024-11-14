@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Servicio para gestionar las operaciones relacionadas con la entidad Cliente.
@@ -67,6 +68,40 @@ public class ClientService {
             return clientRepository.save(client);
         }
         return null;
+    }
+
+    /**
+     * Actualiza parcialmente los datos de un cliente existente.
+     *
+     * @param clientId    ID del cliente a actualizar.
+     * @param updatedData Datos parciales del cliente a actualizar.
+     * @return Cliente actualizado o null si no existe.
+     */
+    public Client updateClientPartially(Long clientId, Client updatedData) {
+        Optional<Client> clientOpt = clientRepository.findById(clientId);
+
+        if (clientOpt.isPresent()) {
+            Client client = clientOpt.get();
+
+            // Solo se actualizan los campos no nulos que se pasan
+            if (updatedData.getName() != null) {
+                client.setName(updatedData.getName());
+            }
+            if (updatedData.getLastName() != null) {
+                client.setLastName(updatedData.getLastName());
+            }
+            if (updatedData.getEmail() != null) {
+                client.setEmail(updatedData.getEmail());
+            }
+            if (updatedData.getPhone() != null) {
+                client.setPhone(updatedData.getPhone());
+            }
+
+            // Guardar el cliente con los campos actualizados
+            return clientRepository.save(client);
+        }
+
+        return null;  // Si el cliente no existe
     }
 
     /**

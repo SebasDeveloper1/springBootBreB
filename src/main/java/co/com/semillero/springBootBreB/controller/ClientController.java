@@ -68,6 +68,18 @@ public class ClientController {
     }
 
     /**
+     * Actualiza parcialmente los datos de un cliente.
+     *
+     * @param clientId    ID del cliente a actualizar.
+     * @param updatedData Datos parciales del cliente a actualizar.
+     * @return Cliente actualizado con los datos proporcionados.
+     */
+    @PatchMapping("/{clientId}")
+    public Client updateClientPartially(@PathVariable Long clientId, @RequestBody Client updatedData) {
+        return clientService.updateClientPartially(clientId, updatedData);
+    }
+
+    /**
      * Elimina un cliente de la base de datos por su ID.
      *
      * @param clientId ID del cliente a eliminar, obtenido de la ruta.
