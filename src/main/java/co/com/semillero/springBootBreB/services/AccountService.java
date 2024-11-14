@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Servicio para gestionar las operaciones relacionadas con la entidad Cuenta.
@@ -45,6 +46,40 @@ public class AccountService {
      */
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
+    }
+
+    /**
+     * Actualiza parcialmente una cuenta en la base de datos.
+     * Solo los campos presentes en el DTO serán actualizados.
+     *
+     * @param accountId          ID de la cuenta a actualizar.
+     * @param accountRequestDTO DTO con los datos a actualizar.
+     * @return Cuenta actualizada o null si no existe.
+     */
+    public Account updateAccountPartial(Long accountId, AccountRequestDTO accountRequestDTO) {
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+
+            // Actualizar solo los campos no nulos
+            if (accountRequestDTO.getAccountKey() != null) {
+                account.setAccountKey(accountRequestDTO.getAccountKey());
+            }
+            if (accountRequestDTO.getInitialBalance() != null) {
+                account.setBalance(accountRequestDTO.getInitialBalance());
+            }
+            if (accountRequestDTO.getAccountType() != null) {
+                account.setAccountType(accountRequestDTO.getAccountType());
+            }
+            if (accountRequestDTO.getBank() != null) {
+                account.setBank(accountRequestDTO.getBank());
+            }
+
+            return accountRepository.save(account);
+        }
+
+        return null;
     }
 
     /**

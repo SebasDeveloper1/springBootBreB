@@ -45,6 +45,19 @@ public class AccountController {
     }
 
     /**
+     * Actualiza parcialmente una cuenta en la base de datos.
+     * Solo los campos proporcionados en el DTO serán actualizados.
+     *
+     * @param accountId          ID de la cuenta a actualizar.
+     * @param accountRequestDTO DTO con los datos a actualizar.
+     * @return Cuenta actualizada o null si no existe.
+     */
+    @PatchMapping("/{accountId}")
+    public Account updateAccountPartial(@PathVariable Long accountId, @RequestBody AccountRequestDTO accountRequestDTO) {
+        return accountService.updateAccountPartial(accountId, accountRequestDTO);
+    }
+
+    /**
      * Obtiene una cuenta por su ID.
      *
      * @param accountId ID de la cuenta a buscar, obtenido de la ruta.
