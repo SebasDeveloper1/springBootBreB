@@ -6,6 +6,8 @@ import co.com.semillero.springBootBreB.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Controlador REST para gestionar las operaciones relacionadas con los clientes.
  * <p>
@@ -30,6 +32,16 @@ public class ClientController {
     @PostMapping
     public Client createUser(@RequestBody Client client) {
         return clientService.createClient(client);
+    }
+
+    /**
+     * Obtiene la lista de todos los clientes.
+     *
+     * @return Lista de clientes.
+     */
+    @GetMapping
+    public List<Client> getAllClients() {
+        return clientService.getAllClients();
     }
 
     /**

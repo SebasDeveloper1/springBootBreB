@@ -5,6 +5,8 @@ import co.com.semillero.springBootBreB.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Servicio para gestionar las operaciones relacionadas con la entidad Cliente.
  * <p>
@@ -27,6 +29,15 @@ public class ClientService {
      */
     public Client createClient(Client client) {
         return clientRepository.save(client);
+    }
+
+    /**
+     * Obtiene la lista de todos los clientes.
+     *
+     * @return Lista de clientes.
+     */
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
     }
 
     /**
