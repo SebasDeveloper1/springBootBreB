@@ -56,6 +56,11 @@ public class Transaction {
      */
     private String status;
 
+    /**
+     * Campo para el mensaje de estado.
+     */
+    private String message;
+
     // Getters y setters
 
     /**
@@ -164,5 +169,23 @@ public class Transaction {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * Obtiene el mensaje de estado de la transacción.
+     *
+     * @return status Estado de la transacción.
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * Establece el mensaje de estado de la transacción.
+     *
+     * @param message Mensaje de estado de la transacción.
+     */
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

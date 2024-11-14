@@ -1,9 +1,13 @@
 package co.com.semillero.springBootBreB.services;
 
+import co.com.semillero.springBootBreB.dto.TransactionResponseDTO;
 import co.com.semillero.springBootBreB.entity.Transaction;
+import co.com.semillero.springBootBreB.repository.AccountRepository;
 import co.com.semillero.springBootBreB.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * Servicio para gestionar las operaciones relacionadas con las transacciones.
@@ -17,19 +21,39 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
 
     @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
     private TransactionRepository transactionRepository;
 
-    /**
-     * Crea una nueva transacción en la base de datos.
-     * <p>
-     * En esta función se pueden agregar validaciones adicionales, como verificar que el cliente tenga fondos suficientes,
-     * la validez de las cuentas involucradas, el estado de la transacción, entre otras.
-     *
-     * @param transaction Objeto Transacción a crear, recibido como parámetro.
-     * @return La transacción creada y guardada en la base de datos.
-     */
-    public Transaction createTransaction(Transaction transaction) {
-        // Aquí puedes validar fondos, estados, etc.
-        return transactionRepository.save(transaction);
+    public TransactionResponseDTO createTransaction(Transaction transaction) {
+        // Validación de las cuentas y ejecución de la lógica de transferencia
+        var sourceAccount = accountRepository.findById(transaction.getSourceAccountId());
+        var destinationAccount = accountRepository.findById(transaction.getDestinationAccountId());
+
+        if (sourceAccount.isEmpty() || destinationAccount.isEmpty()) {
+            return new TransactionResponseDTO(null, transaction.getSourceAccountId(), transaction.getDestinationAccountId(),
+                    transaction.getAmount(), LocalDateTime.now(), "FALLIDO", "Una o ambas cuentas no existen");
+        }
+
+        if (sourceAccount.get().getBalance() < transaction.getAmount()) {
+            return new TransactionResponseDTO(null, transaction.getSourceAccountId(), transaction.getDestinationAccountId(),
+                    transaction.getAmount(), LocalDateTime.now(), "FALLIDO", "Saldo insuficiente en la cuenta de origen");
+        }
+
+        // Lógica de transferencia exitosa
+        sourceAccount.get().setBalance(sourceAccount.get().getBalance() - transaction.getAmount());
+        destinationAccount.get().setBalance(destinationAccount.get().getBalance() + transaction.getAmount());
+        transaction.setStatus("COMPLETADO");
+        transaction.setMessage("Transacción completada exitosamente");
+
+        // Guardar transacción y cuentas en la base de datos
+        accountRepository.save(sourceAccount.get());
+        accountRepository.save(destinationAccount.get());
+        transactionRepository.save(transaction);
+
+        return new TransactionResponseDTO(transaction.getTransactionId(), transaction.getSourceAccountId(),
+                transaction.getDestinationAccountId(), transaction.getAmount(), transaction.getDate(), transaction.getStatus(),
+                transaction.getMessage());
     }
 }

@@ -1,5 +1,6 @@
 package co.com.semillero.springBootBreB.controller;
 
+import co.com.semillero.springBootBreB.dto.TransactionResponseDTO;
 import co.com.semillero.springBootBreB.entity.Transaction;
 import co.com.semillero.springBootBreB.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,10 @@ public class TransactionController {
      * Recibe un objeto de transacción en el cuerpo de la solicitud y lo pasa al servicio para su procesamiento.
      *
      * @param transaction Objeto Transacción a crear, recibido en el cuerpo de la solicitud.
-     * @return La transacción creada y guardada en la base de datos.
+     * @return La transacción creada y su estado detallado.
      */
     @PostMapping
-    public Transaction createTransaction(@RequestBody Transaction transaction) {
+    public TransactionResponseDTO createTransaction(@RequestBody Transaction transaction) {
         return transactionService.createTransaction(transaction);
     }
 }
