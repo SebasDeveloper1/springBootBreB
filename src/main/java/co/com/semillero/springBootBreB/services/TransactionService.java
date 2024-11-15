@@ -13,7 +13,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Servicio para gestionar las operaciones relacionadas con las transacciones.
+ * Servicio para gestionar las operaciones relacionadas con la entidad transaction.
+ * <p>
+ * Anotaciones:
+ * - @Service: Indica que esta clase es un servicio de Spring, donde se implementa la lógica de negocio relacionada
+ * con las transacciones.
+ * - @Autowired: Inyecta automáticamente una instancia del repositorio de transacciones para interactuar con la base de datos.
  */
 @Service
 public class TransactionService {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Servicio para gestionar las operaciones relacionadas con la entidad Cliente.
+ * Servicio para gestionar las operaciones relacionadas con la entidad Client.
  * <p>
  * Anotaciones:
  * - @Service: Indica que esta clase es un servicio de Spring, donde se implementa la lógica de negocio relacionada
@@ -54,8 +54,8 @@ public class ClientService {
     /**
      * Actualiza la información de un cliente existente.
      *
-     * @param clientId       ID del cliente a actualizar.
-     * @param updatedClient  Cliente con la información actualizada.
+     * @param clientId      ID del cliente a actualizar.
+     * @param updatedClient Cliente con la información actualizada.
      * @return Cliente actualizado y guardado en la base de datos o null si el cliente no existe.
      */
     public Client updateClient(Long clientId, Client updatedClient) {
@@ -84,6 +84,12 @@ public class ClientService {
             Client client = clientOpt.get();
 
             // Solo se actualizan los campos no nulos que se pasan
+            if (updatedData.getDocumentType() != null) {
+                client.setDocumentType(updatedData.getDocumentType());
+            }
+            if (updatedData.getDocumentNumber() != null) {
+                client.setDocumentNumber(updatedData.getDocumentNumber());
+            }
             if (updatedData.getName() != null) {
                 client.setName(updatedData.getName());
             }

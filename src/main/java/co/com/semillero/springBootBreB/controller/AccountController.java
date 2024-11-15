@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controlador REST para gestionar las operaciones relacionadas con las cuentas.
+ * Controlador REST para gestionar las operaciones CRUD relacionadas con las cuentas.
  * <p>
- * Anotaciones:
- * - @RestController: Indica que esta clase es un controlador de Spring que responde con JSON.
- * - @RequestMapping("/api/accounts"): Define el prefijo de la URL para todas las rutas en este controlador.
- * - @Autowired: Inyecta automáticamente el servicio de cuentas para interactuar con la lógica de negocio.
+ * Utiliza las anotaciones de Spring:
+ * - @RestController: Indica que la clase responde con JSON.
+ * - @RequestMapping("/api/accounts"): Define el prefijo de la URL para las rutas.
+ * - @Autowired: Inyecta el servicio AccountService para realizar las operaciones.
  */
 @RestController
 @RequestMapping("/api/accounts")
@@ -48,7 +48,7 @@ public class AccountController {
      * Actualiza parcialmente una cuenta en la base de datos.
      * Solo los campos proporcionados en el DTO serán actualizados.
      *
-     * @param accountId          ID de la cuenta a actualizar.
+     * @param accountId ID de la cuenta a actualizar.
      * @param accountRequestDTO DTO con los datos a actualizar.
      * @return Cuenta actualizada o null si no existe.
      */
@@ -58,9 +58,9 @@ public class AccountController {
     }
 
     /**
-     * Obtiene una cuenta por su ID desde el encabezado de la solicitud.
+     * Obtiene una cuenta por su ID desde el Header de la solicitud.
      *
-     * @param accountId ID de la cuenta a buscar, recibido en el encabezado de la solicitud.
+     * @param accountId ID de la cuenta a buscar, recibido en el Header de la solicitud.
      * @return Cuenta encontrada o null si no existe.
      */
     @GetMapping("/details")

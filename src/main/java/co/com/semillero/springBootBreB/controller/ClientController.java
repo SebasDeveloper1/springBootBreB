@@ -45,9 +45,9 @@ public class ClientController {
     }
 
     /**
-     * Obtiene un cliente por su ID desde el encabezado de la solicitud.
+     * Obtiene un cliente por su ID desde el Header de la solicitud.
      *
-     * @param clientId ID del cliente a buscar, recibido en el encabezado de la solicitud.
+     * @param clientId ID del cliente a buscar, recibido en el Header de la solicitud.
      * @return Cliente encontrado o null si no existe.
      */
     @GetMapping("/details")
@@ -58,7 +58,7 @@ public class ClientController {
     /**
      * Actualiza la información de un cliente existente.
      *
-     * @param clientId      ID del cliente a actualizar, obtenido de la ruta.
+     * @param clientId ID del cliente a actualizar, obtenido de la ruta.
      * @param updatedClient Cliente con la información actualizada, recibido en el cuerpo de la solicitud.
      * @return Cliente actualizado y guardado en la base de datos o null si el cliente no existe.
      */
@@ -70,7 +70,7 @@ public class ClientController {
     /**
      * Actualiza parcialmente los datos de un cliente.
      *
-     * @param clientId    ID del cliente a actualizar.
+     * @param clientId ID del cliente a actualizar.
      * @param updatedData Datos parciales del cliente a actualizar.
      * @return Cliente actualizado con los datos proporcionados.
      */

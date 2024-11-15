@@ -1,21 +1,22 @@
 package co.com.semillero.springBootBreB.dto;
 
 /**
- * DTO para la creación de una cuenta bancaria.
- * Contiene los datos necesarios para crear una cuenta, incluyendo el balance inicial.
+ * DTO (Data Transfer Object) utilizado para la creación de una cuenta.
+ * Este objeto encapsula los datos necesarios para registrar una nueva cuenta en el sistema.
  */
 public class AccountRequestDTO {
 
-    private Long clientId;
-    private String accountKey;
-    private Double initialBalance;
-    private String accountType;
-    private String bank;
+    private Long clientId;     // ID del cliente asociado a la cuenta.
+    private String accountKey; // Alias o llave para identificar la cuenta.
+    private Double initialBalance; // Saldo inicial de la cuenta.
+    private String accountType;   // Tipo de cuenta (ahorro, corriente, etc.).
+    private String bank;         // Banco donde se abrirá la cuenta.
 
     // Constructor
     public AccountRequestDTO() {
     }
 
+    // Constructor con parámetros
     public AccountRequestDTO(Long clientId, String accountKey, Double initialBalance, String accountType, String bank) {
         this.clientId = clientId;
         this.accountKey = accountKey;

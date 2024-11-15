@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Servicio para gestionar las operaciones relacionadas con la entidad Cuenta.
+ * Servicio para gestionar las operaciones relacionadas con la entidad Account.
  * <p>
  * Anotaciones:
  * - @Service: Indica que esta clase es un servicio de Spring que contiene la lógica de negocio relacionada
@@ -24,7 +24,7 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     /**
-     * Crea una nueva cuenta en la base de datos a partir de un DTO de solicitud de cuenta.
+     * Crea una nueva cuenta en la base de datos a partir de un DTO.
      *
      * @param accountRequestDTO DTO con los datos de la cuenta a crear.
      * @return La cuenta creada y guardada en la base de datos.

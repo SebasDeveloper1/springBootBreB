@@ -2,19 +2,26 @@ package co.com.semillero.springBootBreB.dto;
 
 import java.time.LocalDateTime;
 
+
 /**
- * DTO para la respuesta de una transacción.
+ * DTO (Data Transfer Object) que encapsula la información de la respuesta de una transacción.
+ * <p>
+ * Este objeto es utilizado para transmitir los detalles de una transacción bancaria
+ * al cliente después de que se haya procesado.
  */
 public class TransactionResponseDTO {
 
-    private Long transactionId;
-    private Long sourceAccountId;
-    private Long destinationAccountId;
-    private Double amount;
-    private LocalDateTime date;
-    private String status;
-    private String message;
+    private Long transactionId;        // ID único de la transacción.
+    private Long sourceAccountId;      // ID de la cuenta origen.
+    private Long destinationAccountId; // ID de la cuenta destino.
+    private Double amount;             // Monto transferido.
+    private LocalDateTime date;        // Fecha y hora de la transacción.
+    private String status;             // Estado de la transacción.
+    private String message;            // Mensaje descriptivo de la transacción.
 
+    /**
+     * Constructor para inicializar todos los campos de la transacción.
+     */
     public TransactionResponseDTO(Long transactionId, Long sourceAccountId, Long destinationAccountId,
                                   Double amount, LocalDateTime date, String status, String message) {
         this.transactionId = transactionId;

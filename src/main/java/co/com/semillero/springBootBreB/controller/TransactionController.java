@@ -10,6 +10,11 @@ import java.util.List;
 
 /**
  * Controlador REST para gestionar las operaciones relacionadas con las transferencias.
+ * <p>
+ * Utiliza las anotaciones de Spring:
+ * - @RestController: Indica que la clase responde con JSON.
+ * - @RequestMapping("/api/transfers"): Define el prefijo de la URL para las rutas.
+ * - @Autowired: Inyecta el servicio TransactionService para realizar las operaciones.
  */
 @RestController
 @RequestMapping("/api/transfers")
@@ -31,9 +36,9 @@ public class TransactionController {
     }
 
     /**
-     * Obtiene todas las transacciones relacionadas con un cliente por su ID, obtenido desde el encabezado de la solicitud.
+     * Obtiene todas las transacciones relacionadas con un cliente por su ID, obtenido desde el Header de la solicitud.
      *
-     * @param clientId El ID del cliente, recibido en el encabezado de la solicitud.
+     * @param clientId El ID del cliente, recibido en el Header de la solicitud.
      * @return Una lista de transacciones asociadas al cliente.
      */
     @GetMapping("/client-transactions")
@@ -43,6 +48,7 @@ public class TransactionController {
 
     /**
      * Obtiene los detalles de una transacción por su ID.
+     * Si la transacción no existe, se retornará un mensaje de error o una respuesta adecuada.
      *
      * @param transactionId El ID de la transacción.
      * @return Los detalles de la transacción, si existe, o un mensaje de error si no.
