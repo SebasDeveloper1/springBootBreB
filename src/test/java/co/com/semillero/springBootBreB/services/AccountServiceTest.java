@@ -39,7 +39,7 @@ class AccountServiceTest {
 
     @Test
     void testCreateAccount() {
-        // Preparar el mock para el método `save`
+        // Preparar el mock para el metodo 'save'
         Account mockAccount = new Account();
         mockAccount.setAccountId(1L);
         mockAccount.setClientId(accountRequestDTO.getClientId());
@@ -65,7 +65,7 @@ class AccountServiceTest {
 
     @Test
     void testGetAllAccounts() {
-        // Preparar el mock para el método `findAll`
+        // Preparar el mock para el metodo 'findAll'
         Account account1 = new Account();
         account1.setAccountId(1L);
         account1.setClientId(1L);
@@ -84,7 +84,7 @@ class AccountServiceTest {
 
         when(accountRepository.findAll()).thenReturn(List.of(account1, account2));
 
-        // Ejecutar el método getAllAccounts
+        // Ejecutar el metodo getAllAccounts
         List<Account> accounts = accountService.getAllAccounts();
 
         // Verificar que el repositorio fue llamado y que se devuelven las cuentas correctas
@@ -95,7 +95,7 @@ class AccountServiceTest {
 
     @Test
     void testGetAccount() {
-        // Preparar el mock para el método 'findById'
+        // Preparar el mock para el metodo 'findById'
         Account mockAccount = new Account();
         mockAccount.setAccountId(1L);
         mockAccount.setClientId(1L);
@@ -106,7 +106,7 @@ class AccountServiceTest {
 
         when(accountRepository.findById(1L)).thenReturn(Optional.of(mockAccount));
 
-        // Ejecutar el método getAccount
+        // Ejecutar el metodo getAccount
         Account account = accountService.getAccount(1L);
 
         // Verificar que el repositorio fue llamado y la cuenta se devuelva correctamente
@@ -136,7 +136,7 @@ class AccountServiceTest {
         when(accountRepository.findById(1L)).thenReturn(Optional.of(existingAccount));
         when(accountRepository.save(any(Account.class))).thenReturn(existingAccount);
 
-        // Ejecutar el método updateAccountPartial
+        // Ejecutar el metodo updateAccountPartial
         Account updatedAccount = accountService.updateAccountPartial(1L, updateRequestDTO);
 
         // Verificar que se actualizaron los campos correctamente
@@ -157,7 +157,7 @@ class AccountServiceTest {
         // Simular que la cuenta no existe
         when(accountRepository.findById(3L)).thenReturn(Optional.empty());
 
-        // Ejecutar el método updateAccountPartial
+        // Ejecutar el metodo updateAccountPartial
         Account updatedAccount = accountService.updateAccountPartial(3L, updateRequestDTO);
 
         // Verificar que el resultado es nulo
