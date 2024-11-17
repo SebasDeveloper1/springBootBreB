@@ -37,19 +37,19 @@ public class TransactionServiceTest {
 
         sourceAccount = new Account();
         sourceAccount.setAccountId(1L);
-        sourceAccount.setBalance(10000.0); // Asegúrate de que tiene un saldo suficiente
+        sourceAccount.setBalance(10000.0);
 
         destinationAccount = new Account();
         destinationAccount.setAccountId(2L);
-        destinationAccount.setBalance(50000.0); // Asegúrate de que la cuenta de destino existe y tiene saldo suficiente
+        destinationAccount.setBalance(50000.0);
 
         transaction = new Transaction();
-        transaction.setTransactionId(1L); // Asegúrate de asignar un ID único
+        transaction.setTransactionId(1L);
         transaction.setSourceAccountId(1L);
         transaction.setDestinationAccountId(2L);
-        transaction.setAmount(200.0); // El monto de la transacción
+        transaction.setAmount(20000.0);
         transaction.setDate(LocalDateTime.now());
-        transaction.setStatus("COMPLETADO"); // Este valor lo cambiará el método si todo sale bien
+        transaction.setStatus("COMPLETADO");
         transaction.setMessage("Transacción completada exitosamente");
 
         // Mocking de las respuestas de los repositorios
@@ -60,7 +60,7 @@ public class TransactionServiceTest {
         when(transactionRepository.findById(1L)).thenReturn(Optional.of(transaction));
     }
 
-    // Test case 1: Crear transacción exitosa
+    //Crear transacción exitosa
     @Test
     public void testCreateTransaction_Success() {
         // Asegurarse de que las cuentas sean encontradas correctamente
@@ -83,7 +83,7 @@ public class TransactionServiceTest {
         verify(transactionRepository, times(1)).save(any(Transaction.class));
     }
 
-    // Test case 2: Cuenta origen no encontrada
+    //Cuenta origen no encontrada
     @Test
     public void testCreateTransaction_SourceAccountNotFound() {
         when(accountRepository.findById(1L)).thenReturn(Optional.empty());
@@ -95,7 +95,7 @@ public class TransactionServiceTest {
         assertEquals("Una o ambas cuentas no existen", response.getMessage());
     }
 
-    // Test case 3: Cuenta destino no encontrada
+    //Cuenta destino no encontrada
     @Test
     public void testCreateTransaction_DestinationAccountNotFound() {
         when(accountRepository.findById(1L)).thenReturn(Optional.of(sourceAccount));
@@ -107,7 +107,7 @@ public class TransactionServiceTest {
         assertEquals("Una o ambas cuentas no existen", response.getMessage());
     }
 
-    // Test case 4: Saldo insuficiente en cuenta de origen
+    // Saldo insuficiente en cuenta de origen
     @Test
     public void testCreateTransaction_InsufficientBalance() {
         sourceAccount.setBalance(50.0); // saldo insuficiente
@@ -121,7 +121,7 @@ public class TransactionServiceTest {
         assertEquals("Saldo insuficiente en la cuenta de origen", response.getMessage());
     }
 
-    // Test case 5: Obtener transacciones por cliente
+    //Obtener transacciones por cliente
     @Test
     public void testGetTransactionsByClientId() {
         Transaction transaction1 = new Transaction();
@@ -141,7 +141,7 @@ public class TransactionServiceTest {
         assertEquals(2, transactions.size());
     }
 
-    // Test case 6: Obtener detalles de transacción
+    //Obtener detalles de transacción
     @Test
     public void testGetTransactionDetails_Found() {
         when(transactionRepository.findById(1L)).thenReturn(Optional.of(transaction));
@@ -152,7 +152,7 @@ public class TransactionServiceTest {
         assertEquals("COMPLETADO", response.getStatus());
     }
 
-    // Test case 7: Obtener detalles de transacción no encontrada
+    //Obtener detalles de transacción no encontrada
     @Test
     public void testGetTransactionDetails_NotFound() {
         when(transactionRepository.findById(999L)).thenReturn(Optional.empty());
@@ -163,7 +163,7 @@ public class TransactionServiceTest {
         assertEquals("Transacción no encontrada", response.getMessage());
     }
 
-    // Test case 8: Eliminar transacción
+    //Eliminar transacción
     @Test
     public void testDeleteTransaction() {
         doNothing().when(transactionRepository).deleteById(1L);
