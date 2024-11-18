@@ -107,8 +107,8 @@ class ClientControllerTest {
     @Test
     void testUpdateUser() throws Exception {
         Client updatedClient = new Client();
-        updatedClient.setName("Updated Name");
-        updatedClient.setEmail("updated@example.com");
+        updatedClient.setName("Ronald Actualizado");
+        updatedClient.setEmail("ronaldactualiado@mail.com");
 
         // Simula la respuesta del servicio
         when(clientService.updateClient(eq(1L), any(Client.class))).thenReturn(updatedClient);
@@ -118,8 +118,8 @@ class ClientControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedClient)))
                 .andExpect(status().isOk()) // Verifica que el código HTTP sea 200 OK
-                .andExpect(jsonPath("$.name").value("Updated Name")) // Verifica que el nombre se actualizó
-                .andExpect(jsonPath("$.email").value("updated@example.com")); // Verifica que el email se actualizó
+                .andExpect(jsonPath("$.name").value("Ronald Actualizado")) // Verifica que el nombre se actualizó
+                .andExpect(jsonPath("$.email").value("ronaldactualiado@mail.com")); // Verifica que el email se actualizó
 
         verify(clientService, times(1)).updateClient(eq(1L), any(Client.class)); // Verifica que el método del servicio fue llamado
     }
