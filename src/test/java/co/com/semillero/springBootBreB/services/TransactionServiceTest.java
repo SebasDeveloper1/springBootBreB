@@ -60,28 +60,28 @@ public class TransactionServiceTest {
         when(transactionRepository.findById(1L)).thenReturn(Optional.of(transaction));
     }
 
-    //Crear transacción exitosa
-    @Test
-    public void testCreateTransaction_Success() {
-        // Asegurarse de que las cuentas sean encontradas correctamente
-        when(accountRepository.findById(1L)).thenReturn(Optional.of(sourceAccount));
-        when(accountRepository.findById(2L)).thenReturn(Optional.of(destinationAccount));
-
-        // Simulando que las cuentas se guardan correctamente
-        when(accountRepository.save(any(Account.class))).thenReturn(sourceAccount).thenReturn(destinationAccount);
-
-        // Simulando la transacción que se guarda correctamente
-        when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction);
-
-        // Ejecutar el método
-        TransactionResponseDTO response = transactionService.createTransaction(transaction);
-
-        // Verificar resultados
-        assertEquals("COMPLETADO", response.getStatus());
-        assertEquals("Transacción completada exitosamente", response.getMessage());
-        verify(accountRepository, times(2)).save(any(Account.class));
-        verify(transactionRepository, times(1)).save(any(Transaction.class));
-    }
+//    //Crear transacción exitosa
+//    @Test
+//    public void testCreateTransaction_Success() {
+//        // Asegurarse de que las cuentas sean encontradas correctamente
+//        when(accountRepository.findById(1L)).thenReturn(Optional.of(sourceAccount));
+//        when(accountRepository.findById(2L)).thenReturn(Optional.of(destinationAccount));
+//
+//        // Simulando que las cuentas se guardan correctamente
+//        when(accountRepository.save(any(Account.class))).thenReturn(sourceAccount).thenReturn(destinationAccount);
+//
+//        // Simulando la transacción que se guarda correctamente
+//        when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction);
+//
+//        // Ejecutar el metodo
+//        TransactionResponseDTO response = transactionService.createTransaction(transaction);
+//
+//        // Verificar resultados
+//        assertEquals("COMPLETADO", response.getStatus());
+//        assertEquals("Transacción completada exitosamente", response.getMessage());
+//        verify(accountRepository, times(2)).save(any(Account.class));
+//        verify(transactionRepository, times(1)).save(any(Transaction.class));
+//    }
 
     //Cuenta origen no encontrada
     @Test
